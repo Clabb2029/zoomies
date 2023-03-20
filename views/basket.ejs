@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="icon" href="/images/logo-no-bg.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="images/logo-no-bg.png" alt="Logo" width="30" class="d-inline-block align-text-top logo">
+                <span style = "color: white;">Zoomies</span>
+            </a>
+        </div>
+    </nav>
+          
+    <div class="breadcrumb_container">
+            <li><a href="/">Home</a></li>
+            <li>></li>
+            <li>Basket</li>
+    </div>
+
+
+    <% if (dataCardZoomies.length == 0) { %> 
+
+    <p class="empty_basket_message">Basket empty ! 😿</p>
+    
+    <% } else { %>
+
+    <div class="col-8 offset-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Picture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% 
+                var totalCmd = 0;
+                for (var i=0 ; i<dataCardZoomies.length ; i++) { %>
+
+                <tr>
+                    <th scope="row"><%= [i+1] %></th>
+                    <td><img src="<%= dataCardZoomies[i].image %>" width="50"></td>
+                    <td><%= dataCardZoomies[i].name %></td>
+                    <td>
+                        <form method="post" action="/update-basket" class="refresh_container">
+                            <input type="hidden" name="position" value="<%=i%>">
+                            <input type="number" name="quantity" value="<%= dataCardZoomies[i].quantity %>" class="refresh_input">
+                            <button class="refresh_btn" type="submit"><i class="fa-solid fa-arrows-rotate"></i></button>
+                        </form>
+                    </td>
+                    <td><%= dataCardZoomies[i].price %> €</td>
+                    <td><%= dataCardZoomies[i].price * dataCardZoomies[i].quantity %> €</td>
+                    <td>
+                        <a class="btn btn-outline-dark btn-sm" href="/delete-basket?position=<%=i%>">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                <% 
+                    totalCmd += dataCardZoomies[i].price * dataCardZoomies[i].quantity;
+                } 
+                %>
+
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total :</td>
+                    <td><%= totalCmd %> €</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <form action="/create-checkout-session" method="POST">
+                            <button class="checkout_btn" type="submit" id="checkout-button">Checkout</button>
+                        </form>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <% } %>
+
+</body>
+</html>

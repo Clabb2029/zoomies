@@ -1,0 +1,65 @@
+.logo {
+  margin: 0 10px;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.breadcrumb_container {
+  background-color: rgb(225, 221, 221);
+  border-radius: 5px;
+  margin: 30px;
+  width: 95vw;
+  padding: 10px 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 20px;
+}
+
+.refresh_container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.refresh_input {
+  max-width: 10vw;
+  border: 1px solid rgb(186, 184, 184);
+  border-radius: 5px;
+
+}
+
+.refresh_btn {
+  border: 1px solid rgb(186, 184, 184);
+  border-radius: 5px;
+}
+
+.trash_btn {
+  border: 0;
+  background: none;
+}
+
+.checkout_btn {
+  border: 1px solid rgb(186, 184, 184);
+  border-radius: 5px;
+}
+
+.empty_basket_message {
+  color: red;
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.payment_message {
+  font-size: 15px;
+  margin-left: 50px;
+  color: rgb(96, 93, 93);
+}
